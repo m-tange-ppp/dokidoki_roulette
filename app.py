@@ -4,6 +4,7 @@ import sqlite3
 
 st.title("ドキドキルーレット")
 st.header("放てことばのきらめき")
+st.text("ことばを3個以上登録して、TokiMekiしてね")
 con = sqlite3.connect("main.db")
 cur = con.cursor()
 cur.execute(
