@@ -13,28 +13,25 @@ cur.execute(
     )"""
 )
 
-if 'temp' not in st.session_state:
-    st.session_state.temp = ""
+with st.form(key="submit_form", clear_on_submit=True):
+    word_input = st.text_input("ことばをスペース区切りで入力してね", placeholder="ことば")
+    submit_button = st.form_submit_button("ことばを登録")
+    if submit_button and word_input != "":
+        word_list = word_input.split()
+        for i in range(len(word_list)):
+            cur.execute("INSERT INTO items (word) VALUES (?)", (word_list[i], ))
+            con.commit()
+        # print(cur.execute("SELECT * FROM items").fetchall())
 
-def submit():
-    st.session_state.temp = st.session_state.widget
-    st.session_state.widget = ""
+res = list(x[0] for x in cur.execute("SELECT word FROM items").fetchall())
+if st.button("Let's TokiMeki!!") and len(res) >= 3:
+    nums = random.sample(list(res), 3)
+    st.markdown(f"# {nums[0]} {nums[1]} {nums[2]}", )
 
-word_input = st.text_input("ことばを入力してね", placeholder="ことば", on_change=submit, key="widget")
-if word_input:
-    cur.execute("INSERT INTO items (word) VALUES (?)", (word_input, ))
-    con.commit()
-    print(cur.execute("SELECT * FROM items").fetchall())
-
-if st.button("テーブルをリセットする"):
+if st.button("ことばのテーブルをリセットする"):
     cur.execute("DELETE FROM items")
     con.commit()
-    print(cur.execute("SELECT * FROM items").fetchall())
-
-if st.button("Let's TokiMeki!!"):
-    res = list(x[0] for x in cur.execute("SELECT word FROM items").fetchall())
-    nums = random.choices(list(res), k=3)
-    st.write(f"{nums[0]} {nums[1]} {nums[2]}")
+    # print(cur.execute("SELECT * FROM items").fetchall())
 
 cur.close()
 con.close()
