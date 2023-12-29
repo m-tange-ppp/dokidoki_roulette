@@ -61,7 +61,7 @@ if st.button("ルーレットを回す") and len(res) >= 3:
     roulette = st.session_state["roulette"] = Roulette(daemon=True)
     roulette.start()
     st.experimental_rerun()
-if st.button("ルーレットを止める"):
+if st.button("ルーレットを止める") and roulette:
     roulette.should_stop.set() # set()でTrueに
     roulette.join() # 前の処理を待つ
     roulette = st.session_state["roulette"] = None
