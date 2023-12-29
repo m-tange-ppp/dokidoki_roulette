@@ -21,7 +21,7 @@ class Roulette(threading.Thread):
 
 # タイトルと初めの処理
 st.title("ドキドキルーレット")
-st.text("ことばを3個以上登録して、TokiMekiしてね")
+st.text("ことばを3個以上登録してルーレットを回してね")
 if not "roulette" in st.session_state:
     st.session_state["roulette"] = None
 roulette = st.session_state["roulette"]
