@@ -80,7 +80,7 @@ if roulette:
             gen = f"# {roulette.words[0]} {roulette.words[1]} {roulette.words[2]}"
         st.session_state["result"] = gen # 生成したものをresultに格納する
         placeholder.markdown(gen)
-        time.sleep(1)
+        time.sleep(0.5)
 st.markdown(result) # resultを表示する
 
 # テーブルをリセットする
