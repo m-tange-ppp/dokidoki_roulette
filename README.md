@@ -14,15 +14,24 @@
 ## インストール方法
 
 1. リポジトリをクローンします：
-   git clone <repository-url>
+
+```
+   git clone https://github.com/m-tange-ppp/dokidoki_roulette
+```
 
 2. 必要なパッケージをインストールします：
+
+```
    pip install streamlit
+```
 
 ## 使用方法
 
 1. アプリケーションを起動します：
+
+```
    streamlit run app.py
+```
 
 2. ブラウザで自動的にアプリケーションが開きます。
    - 通常は `http://localhost:8501` でアクセスできます。
